@@ -1,8 +1,3 @@
-Absolutely! Here's the **fully updated `README.md`** file — reflecting the current structure, features, voice options, admin settings, and setup steps for your Jarvis assistant project.
-
----
-
-```markdown
 # Jarvis Assistant 🧠
 
 A fully offline-capable, sarcastic, highly customizable AI assistant — inspired by Iron Man’s JARVIS — built for Raspberry Pi.  
