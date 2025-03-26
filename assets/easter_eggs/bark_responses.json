@@ -1,0 +1,12 @@
+[
+  { "phrase": "Can I pet that daawg?", "image": "dawg.jpg" },
+  { "phrase": "Oh no, not the woofers again!", "image": "woof.jpg" },
+  { "phrase": "Someone call the pawlice.", "image": "paw.jpg" },
+  { "phrase": "Intruder? No, just a four-legged bestie.", "image": "sniff.jpg" },
+  { "phrase": "Alert: floof detected!", "image": "floof.jpg" },
+  { "phrase": "I've sniffed a disturbance in the force.", "image": "barkmode.jpg" },
+  { "phrase": "That bark had emotional depth.", "image": "deepbark.jpg" },
+  { "phrase": "Let me throw a bone your way.", "image": "bone.jpg" },
+  { "phrase": "Engaging tail wag protocol.", "image": "tailwag.jpg" },
+  { "phrase": "Canine contact confirmed, Mr. Stark.", "image": "confirmed.jpg" }
+]

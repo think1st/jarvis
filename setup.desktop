@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Jarvis Assistant
+Comment=Start the Jarvis AI system
+Exec=/home/pi/jarvis-assistant/venv/bin/python /home/pi/jarvis-assistant/main.py
+Path=/home/pi/jarvis-assistant
+Terminal=true
+Type=Application
+Icon=utilities-terminal
+Categories=Utility;Application;

@@ -1,0 +1,39 @@
+{
+  "wake_word": "Hey Jarvis",
+  "assistant_name": "Jarvis",
+  "user_title": "MR. Stark",
+  "personality": "default",
+  "selected_personality": "personality01",
+  "pre_prompt": "Your answers should always include some sarcasm and address me as MR. Stark.",
+  "post_prompt": "",
+  "voice_settings": {
+    "rate": 170,
+    "volume": 1.0,
+    "voice_id": 0
+  },
+  "tts_engine": "espeak-ng",
+  "stt_engine": "whisper",
+  "whisper_model": "base.en",
+  "downloaded_whisper_models": ["base.en"],
+  "email_profiles": [],
+  "active_google_account": "",
+  "calendar_preferences": {},
+  "email_signoff": "Kind regards,\nJarvis",
+  "openai_key": "",
+  "auth0_domain": "",
+  "auth0_client_id": "",
+  "auth0_client_secret": "",
+  "paired_devices": [],
+  "iot_devices": [],
+  "protocols": {},
+  "habit_memory": {},
+  "dream_mode_timeout": 60,
+  "paranoid_check_interval": 120,
+  "alert_email": "your@email.com",
+  "holographic_mode": false,
+  "last_backup_time": "",
+  "admin": {
+    "username": "admin",
+    "password": "tonystark"
+  }
+}
