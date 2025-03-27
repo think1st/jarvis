@@ -132,6 +132,7 @@ jarvis/
 │   ├── personality01/
 │   └── personality02/
 ├── static/
+│   ├── login_background.mp4
 │   ├── css/
 │   │   └── styles.css
 │   └── js/
