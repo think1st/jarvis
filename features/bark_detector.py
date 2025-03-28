@@ -17,7 +17,7 @@ def load_bark_responses():
 def handle_bark(user_title="Mr. Stark"):
     responses = load_bark_responses()
     if not responses:
-        speak_tet("Can I pet that daaaawg?")
+        speak_text("Can I pet that daaaawg?")
         return
 
     choice = random.choice(responses)
