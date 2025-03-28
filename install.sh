@@ -30,7 +30,7 @@ source "$VENV_DIR/bin/activate"
 
 echo "📦 Installing Python dependencies..."
 pip install --upgrade pip
-pip install flask pyttsx3 gtts vosk \
+pip install flask pyttsx3 openai gtts vosk \
   SpeechRecognition pyaudio faster-whisper \
   sounddevice soundfile
 
