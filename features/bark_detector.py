@@ -1,7 +1,7 @@
 import random
 import json
 import os
-from text_to_speech import speak
+from text_to_speech import speak_text
 from video_manager import display_image
 
 BARK_RESPONSES_PATH = "assets/easter_eggs/bark_responses.json"
@@ -17,14 +17,14 @@ def load_bark_responses():
 def handle_bark(user_title="Mr. Stark"):
     responses = load_bark_responses()
     if not responses:
-        speak("A dog barked, but I have nothing witty to say.")
+        speak_tet("Can I pet that daaaawg?")
         return
 
     choice = random.choice(responses)
     phrase = choice.get("phrase", "Can I pet that daawg?").replace("{title}", user_title)
     image = choice.get("image", "assets/easter_eggs/dawg.jpg")
 
-    speak(phrase)
+    speak_text(phrase)
     display_image(image)
 
 
