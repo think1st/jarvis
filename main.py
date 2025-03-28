@@ -3,7 +3,7 @@ import time
 import threading
 from config_manager import load_config
 from speech_to_text import recognize_speech
-from text_to_speech import speak_text
+from text_to_speech import speak
 from video_manager import VideoManager
 
 # Feature modules (from features/)
