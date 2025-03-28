@@ -26,14 +26,18 @@ class VideoManager:
         file = self._get_video_file(state)
         if file:
             self.current_process = subprocess.Popen(
-                ["omxplayer", "--loop", "-o", "both", file],
+                ["mpv", "--fs", "--loop", "--no-osd-bar", "--no-terminal", file],
                 stdout=subprocess.DEVNULL,
                 stderr=subprocess.DEVNULL
             )
 
     def display_image(self, image_path):
         self.stop()
-        subprocess.Popen(["fbi", "-T", "1", "-d", "/dev/fb0", "-noverbose", image_path])
+        self.current_process = subprocess.Popen(
+            ["fim", "-a", image_path],
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL
+        )
 
     def stop(self):
         if self.current_process and self.current_process.poll() is None:
