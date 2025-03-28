@@ -6,7 +6,7 @@ import tempfile
 from config_manager import load_config
 
 
-def speak_text(text):
+def speak(text):
     config = load_config()
     tts_engine = config.get("tts_engine", "espeak")
     voice_settings = config.get("voice_settings", {})
