@@ -2,13 +2,15 @@
 
 set -e
 
-JARVIS_DIR="$HOME/jarvis-assistant"
+JARVIS_DIR="$HOME/jarvis"
 
 echo "🔧 Updating system and installing base dependencies..."
 sudo apt update && sudo apt upgrade -y
-sudo apt install -y python3 python3-pip python3-venv \
-  omxplayer portaudio19-dev libasound2-dev espeak espeak-ng mpg123 ffmpeg \
-  git hostapd dnsmasq unzip libffi-dev python3-dev build-essential fbi
+
+sudo apt install -y \
+  python3 python3-pip python3-venv \
+  mpv portaudio19-dev libasound2-dev espeak-ng mpg123 ffmpeg \
+  git hostapd dnsmasq unzip libffi-dev python3-dev build-essential fbida wget curl
 
 # Clone or update repo
 if [ ! -d "$JARVIS_DIR" ]; then
@@ -50,11 +52,11 @@ if [ ! -f "config/config.json" ]; then
   cp config_default.json config/config.json
 fi
 
-# Download Whisper base model
+# Download Whisper base model (faster-whisper base.en)
 echo "🧠 Downloading Whisper base.en model..."
 mkdir -p ~/.cache/whisper/base.en
 cd ~/.cache/whisper/base.en
-wget -nc https://huggingface.co/guillaumekln/faster-whisper-large-v2/resolve/main/model.bin -O model.bin || true
+wget -nc https://huggingface.co/guillaumekln/faster-whisper-base.en/resolve/main/model.bin -O model.bin || true
 cd "$JARVIS_DIR"
 
 # Set permissions
@@ -73,6 +75,7 @@ ExecStart=$JARVIS_DIR/venv/bin/python $JARVIS_DIR/main.py
 WorkingDirectory=$JARVIS_DIR
 Restart=always
 User=$USER
+Environment=PYTHONUNBUFFERED=1
 
 [Install]
 WantedBy=multi-user.target
