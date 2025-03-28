@@ -32,12 +32,12 @@ class VideoManager:
             )
 
     def display_image(self, image_path):
-        self.stop()
-        self.current_process = subprocess.Popen(
-            ["fim", "-a", image_path],
-            stdout=subprocess.DEVNULL,
-            stderr=subprocess.DEVNULL
-        )
+    self.stop()
+    self.current_process = subprocess.Popen(
+        ["feh", "--fullscreen", "--hide-pointer", "--auto-zoom", image_path],
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL
+    )
 
     def stop(self):
         if self.current_process and self.current_process.poll() is None:
