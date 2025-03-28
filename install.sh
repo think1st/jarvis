@@ -4,6 +4,7 @@ set -e
 
 JARVIS_DIR="$HOME/jarvis"
 VENV_DIR="$JARVIS_DIR/venv"
+CURRENT_USER=$(whoami)
 
 echo "🔧 Updating system and installing base dependencies..."
 sudo apt update && sudo apt upgrade -y
@@ -48,13 +49,9 @@ cd ~/.cache/whisper/base.en
 wget -nc https://huggingface.co/guillaumekln/faster-whisper-base.en/resolve/main/model.bin -O model.bin || true
 cd "$JARVIS_DIR"
 
-echo "🛠 Setting permissions..."
-chmod +x *.sh
-
-echo "🧩 Creating systemd service..."
+echo "🛠 Creating systemd service..."
 SERVICE_FILE="/etc/systemd/system/jarvis.service"
-
-sudo tee $SERVICE_FILE > /dev/null <<EOF
+sudo tee "$SERVICE_FILE" > /dev/null <<EOF
 [Unit]
 Description=Jarvis Assistant
 After=network.target
@@ -63,16 +60,18 @@ After=network.target
 ExecStart=$VENV_DIR/bin/python $JARVIS_DIR/main.py
 WorkingDirectory=$JARVIS_DIR
 Restart=always
-User=$USER
+User=$CURRENT_USER
 Environment=PYTHONUNBUFFERED=1
 
 [Install]
 WantedBy=multi-user.target
 EOF
 
+echo "🔁 Enabling and reloading systemd..."
 sudo systemctl daemon-reexec
 sudo systemctl enable jarvis.service
 
-echo -e "\n✅ Jarvis is installed. Reboot or run:"
+echo -e "\n✅ Jarvis installed and set to start on boot."
+echo "You can start it manually with:"
 echo "   sudo systemctl start jarvis"
-echo "Then visit http://<your-pi-ip>:5000 to configure."
+echo "Or reboot and it will auto-start."
