@@ -2,9 +2,10 @@ import random
 import json
 import os
 from text_to_speech import speak_text
-from video_manager import display_image
+from video_manager import VideoManager  # Import the class
 
 BARK_RESPONSES_PATH = "assets/easter_eggs/bark_responses.json"
+video_manager = VideoManager()  # Create an instance of the class
 
 
 def load_bark_responses():
@@ -25,8 +26,4 @@ def handle_bark(user_title="Mr. Stark"):
     image = choice.get("image", "assets/easter_eggs/dawg.jpg")
 
     speak_text(phrase)
-    display_image(image)
-
-
-# Example usage:
-# handle_bark("Dr. Banner")
+    video_manager.display_image(image)  # Call method on the instance
