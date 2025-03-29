@@ -13,7 +13,8 @@ sudo apt install -y \
   python3 python3-pip python3-venv \
   mpv portaudio19-dev libasound2-dev \
   libffi-dev python3-dev build-essential \
-  feh ffmpeg git wget curl unzip
+  feh ffmpeg git wget curl unzip \
+  pulseaudio pulseaudio-module-bluetooth bluez mpg123
 
 echo "📁 Ensuring Jarvis directory exists..."
 mkdir -p "$JARVIS_DIR"
