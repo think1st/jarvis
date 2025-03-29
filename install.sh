@@ -32,7 +32,7 @@ echo "📦 Installing Python dependencies..."
 pip install --upgrade pip
 pip install flask pyttsx3 openai gtts vosk \
   SpeechRecognition pyaudio faster-whisper \
-  sounddevice soundfile \ 
+  sounddevice soundfile \
   google-auth google-auth-oauthlib google-api-python-client
 
 echo "📁 Creating folder structure..."
@@ -42,6 +42,15 @@ touch features/__init__.py
 if [ ! -f "config/config.json" ]; then
   echo "⚙️ Copying default config..."
   cp config_default.json config/config.json
+fi
+
+# 🗣️ Set TTS engine to gTTS
+echo "🎤 Setting TTS engine to gTTS in config..."
+CONFIG_FILE="$JARVIS_DIR/config/config.json"
+if grep -q '"tts_engine":' "$CONFIG_FILE"; then
+  sed -i 's/"tts_engine": *"[^"]*"/"tts_engine": "gtts"/' "$CONFIG_FILE"
+else
+  sed -i '1s/^/{\n  "tts_engine": "gtts",\n/' "$CONFIG_FILE"
 fi
 
 echo "🧠 Downloading Whisper base.en model..."
