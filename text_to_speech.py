@@ -20,7 +20,7 @@ def speak_text(text):
             with tempfile.NamedTemporaryFile(delete=False, suffix=".mp3") as fp:
                 temp_path = fp.name
                 tts.save(temp_path)
-            os.system(f"mpg123 {temp_path}")
+            os.system(f"paplay {temp_path}")
             os.remove(temp_path)
         except Exception as e:
             print("[ERROR] Failed to use gTTS:", e)
