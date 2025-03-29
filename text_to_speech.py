@@ -1,14 +1,14 @@
-# text_to_speech.py
 import pyttsx3
 from gtts import gTTS
 import os
 import tempfile
+import subprocess
 from config_manager import load_config
 
 
 def speak_text(text):
     config = load_config()
-    tts_engine = config.get("tts_engine", "espeak")
+    tts_engine = config.get("tts_engine", "gtts")  # Changed to gTTS default
     voice_settings = config.get("voice_settings", {})
     voice_id = voice_settings.get("voice_id", 0)
     rate = voice_settings.get("rate", 170)
@@ -20,8 +20,16 @@ def speak_text(text):
             with tempfile.NamedTemporaryFile(delete=False, suffix=".mp3") as fp:
                 temp_path = fp.name
                 tts.save(temp_path)
-            os.system(f"paplay {temp_path}")
+
+            # 🔍 Autodetect if a Bluetooth speaker is connected
+            sinks = subprocess.check_output(["pactl", "list", "short", "sinks"]).decode()
+            if "bluez_sink" in sinks:
+                os.system(f"paplay {temp_path}")
+            else:
+                os.system(f"mpg123 {temp_path}")
+
             os.remove(temp_path)
+
         except Exception as e:
             print("[ERROR] Failed to use gTTS:", e)
 
