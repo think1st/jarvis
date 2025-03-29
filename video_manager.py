@@ -31,6 +31,16 @@ class VideoManager:
                 stderr=subprocess.DEVNULL
             )
 
+    def play_once(self, state):
+    self.stop()
+    file = self._get_video_file(state)
+    if file:
+        self.current_process = subprocess.Popen(
+            ["mpv", "--fs", "--no-loop", "--no-osd-bar", "--no-terminal", file],
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL
+        )
+
     def display_image(self, image_path):
         self.stop()
         self.current_process = subprocess.Popen(
