@@ -67,7 +67,7 @@ def speak_text(text):
                     "similarity_boost": 0.8,
                     "style": 0.3,
                     "use_speaker_boost": True,
-                    "speed": 0.75  # 👈 Add this line to slow it down (default is 1.0)
+                    "speed": 0.85  # 👈 Add this line to slow it down (default is 1.0)
             }
 
             }
