@@ -31,10 +31,11 @@ source "$VENV_DIR/bin/activate"
 
 echo "📦 Installing Python dependencies..."
 pip install --upgrade pip
-pip install flask pyttsx3 openai gtts vosk \
+pip install flask pyttsx3 pynput openai gtts vosk \
   SpeechRecognition pyaudio faster-whisper \
   sounddevice soundfile \
   google-auth google-auth-oauthlib google-api-python-client
+  
 
 echo "📁 Creating folder structure..."
 mkdir -p config backup features assets/qr assets/video assets/easter_eggs personalities static/js static/css templates
