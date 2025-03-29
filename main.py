@@ -1,6 +1,6 @@
 import time
 import threading
-import keyboard
+from pynput import keyboard as kb
 from config_manager import load_config
 from speech_to_text import recognize_speech
 from text_to_speech import speak_text
