@@ -62,7 +62,7 @@ def speak_text(text):
             }
             payload = {
                 "text": text,
-                voice_settings = {
+                "voice_settings": {
                     "stability": 0.7,
                     "similarity_boost": 0.8,
                     "style": 0.3,
