@@ -27,8 +27,25 @@ user_title = config.get("user_title", "MR. Stark")
 
 def hotkey_listener():
     global video_enabled
-    while True:
-        keyboard.wait("ctrl+alt+j")
+
+    def on_press(key):
+        try:
+            if key == kb.HotKey.parse('<ctrl>+<alt>+j').keys[-1]:
+                # Check if modifiers are active
+                if current_keys == {kb.Key.ctrl_l, kb.Key.alt_l} or current_keys == {kb.Key.ctrl_r, kb.Key.alt_r}:
+                    toggle_visuals()
+        except:
+            pass
+
+    def on_release(key):
+        if key in current_keys:
+            current_keys.remove(key)
+
+    def on_key_down(key):
+        current_keys.add(key)
+
+    def toggle_visuals():
+        nonlocal video_enabled
         video_enabled = not video_enabled
         if video_enabled:
             speak_text("Visuals resumed, sir.")
@@ -36,6 +53,11 @@ def hotkey_listener():
         else:
             speak_text("Visuals disabled.")
             video.stop()
+
+    current_keys = set()
+    with kb.Listener(on_press=on_key_down, on_release=on_release) as listener:
+        listener.join()
+
 
 def main_loop(): 
     global video_enabled
