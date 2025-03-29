@@ -1,5 +1,15 @@
 import time
 import threading
+import glob
+
+# 🧼 Clean up old temp .wav files from Whisper
+for f in glob.glob("/tmp/tmp*.wav"):
+    try:
+        os.remove(f)
+        print(f"[Cleanup] Removed leftover temp file: {f}")
+    except Exception as e:
+        print(f"[Cleanup Error] Could not remove {f}: {e}")
+
 from pynput import keyboard as kb
 from config_manager import load_config
 from speech_to_text import recognize_speech
