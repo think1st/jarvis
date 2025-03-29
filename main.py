@@ -28,7 +28,7 @@ user_title = config.get("user_title", "MR. Stark")
 def hotkey_listener():
     global video_enabled
     while True:
-        keyboard.wait("alt+v")
+        keyboard.wait("ctrl+alt+j")
         video_enabled = not video_enabled
         if video_enabled:
             speak_text("Visuals resumed, sir.")
