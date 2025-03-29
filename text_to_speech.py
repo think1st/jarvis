@@ -62,10 +62,14 @@ def speak_text(text):
             }
             payload = {
                 "text": text,
-                "voice_settings": {
-                    "stability": 0.5,
-                    "similarity_boost": 0.75
-                }
+                voice_settings = {
+                    "stability": 0.7,
+                    "similarity_boost": 0.8,
+                    "style": 0.3,
+                    "use_speaker_boost": True,
+                    "speed": 0.75  # 👈 Add this line to slow it down (default is 1.0)
+            }
+
             }
             response = requests.post(url, json=payload, headers=headers)
             response.raise_for_status()
