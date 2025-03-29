@@ -45,7 +45,7 @@ def hotkey_listener():
         current_keys.add(key)
 
     def toggle_visuals():
-        nonlocal video_enabled
+        global video_enabled
         video_enabled = not video_enabled
         if video_enabled:
             speak_text("Visuals resumed, sir.")
