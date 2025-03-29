@@ -9,7 +9,7 @@
   "voice_settings": {
     "rate": 170,
     "volume": 1.0,
-    "voice_id": 2
+    "voice_id": 26
   },
   "tts_engine": "gtts",
   "stt_engine": "whisper",
