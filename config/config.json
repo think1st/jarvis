@@ -11,7 +11,7 @@
     "volume": 1.0,
     "voice_id": 0
   },
-  "tts_engine": "espeak-ng",
+  "tts_engine": "gtts",
   "stt_engine": "whisper",
   "whisper_model": "base.en",
   "downloaded_whisper_models": ["base.en"],
