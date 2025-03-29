@@ -60,6 +60,40 @@ cd ~/.cache/whisper/base.en
 wget -nc https://huggingface.co/guillaumekln/faster-whisper-base.en/resolve/main/model.bin -O model.bin || true
 cd "$JARVIS_DIR"
 
+echo "🔗 Creating bluetooth_auto_connect.sh script..."
+cat <<EOF > "$JARVIS_DIR/bluetooth_auto_connect.sh"
+#!/bin/bash
+echo "🔄 Auto-connecting to trusted Bluetooth devices..."
+bluetoothctl devices | while read -r _ MAC _; do
+  echo "🔍 Checking \$MAC..."
+  bluetoothctl connect "\$MAC"
+done
+sleep 3
+SINK=\$(pactl list short sinks | grep bluez_sink | awk '{print \$2}' | head -n 1)
+if [ -n "\$SINK" ]; then
+  echo "🎧 Setting default sink to \$SINK"
+  pactl set-default-sink "\$SINK"
+else
+  echo "⚠️ No active Bluetooth sink found."
+fi
+EOF
+
+chmod +x "$JARVIS_DIR/bluetooth_auto_connect.sh"
+
+echo "📎 Adding bluetooth auto-connect to /etc/rc.local..."
+RC_FILE="/etc/rc.local"
+if [ ! -f "$RC_FILE" ]; then
+  echo -e "#!/bin/bash\nexit 0" | sudo tee "$RC_FILE" > /dev/null
+  sudo chmod +x "$RC_FILE"
+fi
+
+if ! grep -q "bluetooth_auto_connect.sh" "$RC_FILE"; then
+  sudo sed -i "/^exit 0/i $JARVIS_DIR/bluetooth_auto_connect.sh &" "$RC_FILE"
+  echo "✅ Added bluetooth auto-connect command to rc.local."
+else
+  echo "ℹ️ bluetooth_auto_connect.sh already in rc.local."
+fi
+
 echo "🛠 Creating systemd service..."
 SERVICE_FILE="/etc/systemd/system/jarvis.service"
 sudo tee "$SERVICE_FILE" > /dev/null <<EOF
