@@ -11,7 +11,22 @@
     "volume": 1.0,
     "voice_id": 26
   },
-  "tts_engine": "gtts",
+  "tts_engine": "elevenlabs",
+  "fallback_tts_engine": "pyttsx3",
+  "tts_settings": {
+    "gtts": {
+      "lang": "en"
+    },
+    "pyttsx3": {
+      "rate": 170,
+      "volume": 1.0,
+      "voice_id": 26
+    },
+    "elevenlabs": {
+      "api_key": "sk_e20b9f53eadc67fc61ac32ba4b9cc05942594495242ccb94",
+      "voice_id": "JBFqnCBsd6RMkjVDRZzb"
+    }
+  },
   "stt_engine": "whisper",
   "whisper_model": "base.en",
   "downloaded_whisper_models": ["base.en"],
