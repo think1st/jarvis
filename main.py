@@ -1,6 +1,7 @@
 import time
 import threading
 import glob
+import os
 
 # 🧼 Clean up old temp .wav files from Whisper
 for f in glob.glob("/tmp/tmp*.wav"):
