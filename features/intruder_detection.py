@@ -1,6 +1,7 @@
 # intruder_detection.py
 import time
 import random
+import os
 from config_manager import load_config
 from text_to_speech import speak_text
 from video_manager import VideoManager
@@ -18,11 +19,15 @@ RESPONSE_LIST = [
     "Impressive impersonation, still not enough."
 ]
 
+TRAINED_FLAG = "features/voice_trained.flag"
+
 class IntruderDetection:
     def __init__(self):
         self.guest_mode_until = 0
-        self.active = True
         self.video = VideoManager()
+
+    def is_trained(self):
+        return os.path.exists(TRAINED_FLAG)
 
     def allow_guest_temporarily(self, duration_minutes=30):
         self.guest_mode_until = time.time() + duration_minutes * 60
@@ -32,7 +37,8 @@ class IntruderDetection:
         return time.time() < self.guest_mode_until
 
     def check_voice_profile(self, voice_id):
-        if not self.active:
+        if not self.is_trained():
+            print("[INFO] IntruderDetection skipped — not trained.")
             return True
         if self.is_guest_mode():
             return True
