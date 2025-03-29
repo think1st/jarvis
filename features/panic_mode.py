@@ -1,4 +1,3 @@
-# panic_mode.py
 import os
 import time
 import traceback
@@ -36,18 +35,23 @@ class PanicMode:
         self.video.play_once("panic")
         speak_text(random.choice(self.panic_messages))
 
+        # Speak the error out loud for convenience
+        simplified_error = error_message.strip().split("\n")[-1]
+        speak_text(f"The problem seems to be: {simplified_error}")
+
+        # Save to logs
         log_path = f"logs/panic_{int(time.time())}.log"
         os.makedirs("logs", exist_ok=True)
         with open(log_path, "w") as f:
             f.write(error_message)
 
+        # Email logs if configured
         if self.email_to and is_online():
             self.send_log_email(log_path, error_message)
 
+        # 🛑 DO NOT reboot during testing
         if critical:
-            speak_text("This error requires a system reboot. Hold on.")
-            time.sleep(3)
-            os.system("sudo reboot")
+            speak_text("This would normally trigger a system reboot. But I'll hold off for now.")
 
     def send_log_email(self, path, message):
         try:
