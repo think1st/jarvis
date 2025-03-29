@@ -1,16 +1,20 @@
 import random
 import json
 import os
+import time
 from text_to_speech import speak_text
 from video_manager import VideoManager
 
 BARK_RESPONSES_PATH = "assets/easter_eggs/bark_responses.json"
-
+TRAINED_FLAG = "features/bark_trained.flag"
 
 class BarkDetector:
     def __init__(self, user_title="Mr. Stark"):
         self.user_title = user_title
         self.video_manager = VideoManager()
+
+    def is_trained(self):
+        return os.path.exists(TRAINED_FLAG)
 
     def load_bark_responses(self):
         if not os.path.exists(BARK_RESPONSES_PATH):
@@ -19,6 +23,10 @@ class BarkDetector:
             return json.load(file)
 
     def handle_bark(self):
+        if not self.is_trained():
+            print("[INFO] BarkDetector skipped — not trained.")
+            return
+
         responses = self.load_bark_responses()
         if not responses:
             speak_text("Can I pet that daaaawg?")
@@ -32,9 +40,6 @@ class BarkDetector:
         self.video_manager.display_image(image)
 
     def listen_for_barks(self):
-        # TODO: Add your bark detection logic here
-        # For now, simulate a bark every 60 seconds
-        import time
         while True:
-            time.sleep(60)
+            time.sleep(60)  # Simulate bark interval
             self.handle_bark()
