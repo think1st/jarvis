@@ -37,7 +37,8 @@ def hotkey_listener():
             speak_text("Visuals disabled.")
             video.stop()
 
-def main_loop():
+def main_loop(): 
+    global video_enabled
     panic = PanicMode()
     detector = IntruderDetection()
     dream = DreamMode()
